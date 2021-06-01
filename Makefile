@@ -1,8 +1,10 @@
 FLAGS =
 TESTENVVAR =
-REGISTRY = quay.io/coreos
-TAG_PREFIX = v
-TAG = $(TAG_PREFIX)$(shell cat VERSION)
+VERSION?=v1.6.0
+GIT_COMMIT:=$(shell git rev-parse --short HEAD)
+REGISTRY = registry.aliyuncs.com/acs
+TAG_PREFIX =
+TAG = $(VERSION)-$(GIT_COMMIT)-aliyun
 LATEST_RELEASE_BRANCH:=release-$(shell cat VERSION | grep -ohE "[0-9]+.[0-9]+")
 PKGS = $(shell go list ./... | grep -v /vendor/)
 ARCH ?= $(shell go env GOARCH)
